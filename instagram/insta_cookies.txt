@@ -1,0 +1,5 @@
+# Netscape HTTP Cookie File
+# Paste your exported Instagram (instagram.com) cookies below this line.
+# Export using a browser extension like "Get cookies.txt LOCALLY" while
+# logged into Instagram, then replace this file's contents with that export.
+# Format (tab-separated): domain  flag  path  secure  expiry  name  value
