@@ -1,0 +1,6 @@
+# Netscape HTTP Cookie File
+# Paste your exported Facebook (facebook.com) cookies below this line.
+# Export using a browser extension like "Get cookies.txt LOCALLY" while
+# logged into Facebook, then replace this file's contents with that export.
+# Needed for private/restricted videos — public videos work without this.
+# Format (tab-separated): domain  flag  path  secure  expiry  name  value
