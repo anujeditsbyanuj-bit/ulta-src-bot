@@ -1,0 +1,77 @@
+# --- Telegram & Bot Frameworks ---
+kurigram
+TgCrypto
+
+# --- Asynchronous & Networking ---
+aiohttp==3.9.5
+requests
+m3u8                # M3U8 playlist parsing for Rexbots/m3u8dl.py
+
+# --- Database & Utilities ---
+motor
+
+# --- Web Framework (Keep Alive) ---
+Flask==2.3.3
+gunicorn==21.2.0
+Jinja2==3.1.2
+werkzeug==2.3.7
+itsdangerous==2.1.2
+
+# --- Media Downloader (/yt, /yta) ---
+# Pinned to a recent release — YouTube/Instagram break old yt-dlp versions
+# often, and an unpinned "yt-dlp" can silently stay on a stale cached
+# install across redeploys on Render/Railway. Bump this periodically, or
+# run `pip install -U yt-dlp` on the host directly if downloads start
+# failing again.
+yt-dlp>=2026.07.04
+
+# --- YouTube PO Token auto-generation (fixes "Sign in to confirm you're
+# not a bot" / 403 errors without needing manual cookies) ---
+# Registers itself as a yt-dlp plugin automatically on install; no extra
+# code wiring needed. Falls back silently to cookies if unavailable.
+bgutil-ytdlp-pot-provider>=1.2.0
+
+# --- Web scraping (Rexbots/mediafire.py precise HTML parsing) ---
+beautifulsoup4
+
+# --- Fembed-family embed-host mirrors (Rexbots/fembed.py) ---
+lk21
+
+# --- Gallery Downloader (/gallery) ---
+gallery-dl
+
+# --- Headless-browser video discovery fallback (JS-rendered players yt-dlp
+# can't parse from raw HTML) — used by Rexbots/headless.py ---
+# `pip install playwright` alone does NOT ship the browser binary — it
+# needs a separate `playwright install chromium` step. That's now handled
+# automatically:
+#   - Docker deploys: the Dockerfile runs it at build time.
+#   - Non-Docker (Procfile/buildpack) deploys: Rexbots/headless.py
+#     self-installs it on first use (one-time ~30-90s delay, cached after).
+# Either way, no manual step needed. If it can't install for some reason,
+# this fallback just no-ops and the bot falls through to gallery-dl /
+# raw-file download as before.
+playwright
+
+# --- Speed Test (/speedtest) ---
+speedtest-cli
+
+# --- AutoPost daily scheduler (/autotest, TMDB movie posts) ---
+apscheduler
+
+# --- System binaries needed for some downloaders (install via apt, NOT pip) ---
+# ffmpeg      -> already required for /fb thumbnails, video metadata
+# aria2       -> needed for magnet/.torrent links (/torrent), FTP links
+#                (/ftp, Rexbots/aria2_dl.py), and resumable direct-HTTP
+#                downloads (Rexbots/urluploader.py)
+# megatools   -> needed for Mega.nz links (/mega)
+feedparser
+
+# --- Google Drive folder/private-file support (/gdrive) — OAuth API ---
+# Needs an admin-generated token.pickle (see GDRIVE_SETUP.md /
+# gdrive_oauth_setup.py) uploaded via /setgdrivetoken. Without it, /gdrive
+# just falls back to the existing public-file-only method — nothing breaks.
+google-api-python-client
+google-auth
+google-auth-oauthlib
+natsort
